@@ -1,6 +1,8 @@
 var express = require('express'); //require express package
 var app = express(); //create application variable
+var fakeArray = require('./models/fakearray.js');
 
+console.log(fakeArray);
 
 app.get('/', function(request, response){
 	response.render('index.ejs');
