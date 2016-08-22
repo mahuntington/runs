@@ -3,7 +3,7 @@ var app = express(); //create application variable
 
 
 app.get('/', function(request, response){
-	response.send('oh hai!');
+	response.render('index.ejs');
 });
 
 //params: port, callback to execute once listening has begun
