@@ -5,7 +5,9 @@ var fakeArray = require('./models/fakearray.js');
 console.log(fakeArray);
 
 app.get('/', function(request, response){
-	response.render('index.ejs');
+	response.render('index.ejs', {
+		dataArray: fakeArray
+	});
 });
 
 //params: port, callback to execute once listening has begun
