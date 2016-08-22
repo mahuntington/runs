@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mahuntington/runs/issues"
   },
-  "homepage": "https://github.com/mahuntington/runs#readme"
+  "homepage": "https://github.com/mahuntington/runs#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
