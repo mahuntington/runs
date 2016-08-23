@@ -3,6 +3,7 @@ var app = express(); //create application variable
 var bodyParser = require('body-parser');
 var PORT = process.env.PORT || 3000;
 
+app.use(express.static('public')); //set up a static asset dir in /public
 app.use(bodyParser.json());
 
 var runController = require('./controllers/runs.js');
