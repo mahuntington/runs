@@ -26,8 +26,13 @@ controller.put('/:id', function(req, res){
 });
 
 controller.delete('/:id', function(req, res){
-	runs.splice(req.params.id, 1);
-	res.json(runs);
+	Run.destroy({ //destroy the run as specified by id in the url
+		where: {
+			id: req.params.id //only delete rows that have the column id set to 1
+	    }
+	}).then(function(didSucceed){
+		res.json(didSucceed); //send back if it succeeded
+	});
 });
 
 module.exports = controller;
