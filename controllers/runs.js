@@ -11,7 +11,7 @@ controller.get('/new', function(req, res){
 });
 
 controller.get('/:id', function(req, res){
-	res.send('run show page for id: ' +  req.params.id);
+	res.json(runs[req.params.id]);
 });
 
 module.exports = controller;
