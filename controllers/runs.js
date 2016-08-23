@@ -3,7 +3,10 @@ var controller = express.Router();
 var Run = require('../models/runs.js');
 
 controller.get('/', function(req, res){
-	res.json(runs);
+	Run.findAll({}).then(function(foundRuns){
+		//createdRun is the object representation of the row created in the DB
+		res.json(foundRuns);
+	});
 });
 
 controller.get('/:id', function(req, res){
