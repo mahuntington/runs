@@ -27,8 +27,16 @@ controller.post('/', function(req, res){
 });
 
 controller.put('/:id', function(req, res){
-	runs[req.params.id] = req.body;
-	res.json(runs);
+	Run.update(
+		req.body, //change the selected runs to match this object
+		{
+			where: {
+				id: req.params.id //only update rows that have the column id set to 1
+			}
+		}
+	).then(function(didSucceed){
+    	res.json(didSucceed); //respond with success status
+	});
 });
 
 controller.delete('/:id', function(req, res){
