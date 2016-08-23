@@ -13,6 +13,11 @@ controller.get('/:id', function(req, res){
 controller.post('/', function(req, res){
 	runs.push(req.body);
 	res.json(runs);
-})
+});
+
+controller.delete('/:id', function(req, res){
+	runs.splice(req.params.id, 1);
+	res.json(runs);
+});
 
 module.exports = controller;
