@@ -10,7 +10,13 @@ controller.get('/', function(req, res){
 });
 
 controller.get('/:id', function(req, res){
-	res.json(runs[req.params.id]);
+	// Run.findOne({
+		// where:{
+			// id:req.params.id
+		// }
+	Run.findById(req.params.id).then(function(foundRuns){
+		res.json(foundRuns);
+	});
 });
 
 controller.post('/', function(req, res){
