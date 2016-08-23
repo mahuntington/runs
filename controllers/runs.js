@@ -1,6 +1,6 @@
 var express = require('express');
 var controller = express.Router();
-var runs = require('../models/runs.js');
+var Run = require('../models/runs.js');
 
 controller.get('/', function(req, res){
 	res.json(runs);
@@ -11,8 +11,13 @@ controller.get('/:id', function(req, res){
 });
 
 controller.post('/', function(req, res){
-	runs.push(req.body);
-	res.json(runs);
+	Run.create({
+		date: new Date('2016-1-1'),
+		distance: 5.5
+	}).then(function(createdRun){
+		//createdRun is the object representation of the row created in the DB
+		res.json(createdRun);
+	});
 });
 
 controller.put('/:id', function(req, res){
