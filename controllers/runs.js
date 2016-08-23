@@ -11,10 +11,7 @@ controller.get('/:id', function(req, res){
 });
 
 controller.post('/', function(req, res){
-	Run.create({
-		date: new Date('2016-1-1'),
-		distance: 5.5
-	}).then(function(createdRun){
+	Run.create(req.body).then(function(createdRun){
 		//createdRun is the object representation of the row created in the DB
 		res.json(createdRun);
 	});
