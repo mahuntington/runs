@@ -1,17 +1,11 @@
-module.exports = [
-	{
-		id:1,
-		distance: 0.5,
-		date: new Date('2016-1-1')
-	},
-	{
-		id:2,
-		distance: 1.5,
-		date: new Date('2016-2-1')
-	},
-	{
-		id:3,
-		distance: 2.5,
-		date: new Date('2016-3-1')
-	},
-];
+var Sequelize = require('sequelize'); //require sequelize package
+var db = require('../models/db_connection.js'); //require connection to the db
+
+var Run = db.define('run', { //set up model variables
+    date: Sequelize.DATE, //use date data type
+    distance: Sequelize.FLOAT, //float for distance
+});
+
+db.sync(); //if table does not exist, create it
+
+module.exports = Run;
