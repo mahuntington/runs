@@ -6,10 +6,6 @@ controller.get('/', function(req, res){
 	res.json(runs);
 });
 
-controller.get('/new', function(req, res){
-	res.send('run new page');
-});
-
 controller.get('/:id', function(req, res){
 	res.json(runs[req.params.id]);
 });
