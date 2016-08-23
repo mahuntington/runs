@@ -1,9 +1,9 @@
 var express = require('express');
 var controller = express.Router();
+var runs = require('../models/runs.js');
 
 controller.get('/', function(req, res){
-	console.log(req.query.foo);
-	res.send('run index page');
+	res.json(runs);
 });
 
 controller.get('/new', function(req, res){
