@@ -2,6 +2,7 @@ var express = require('express');
 var controller = express.Router();
 
 controller.get('/', function(req, res){
+	console.log(req.query.foo);
 	res.send('run index page');
 });
 
