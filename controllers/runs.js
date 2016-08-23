@@ -15,8 +15,8 @@ controller.get('/:id', function(req, res){
 });
 
 controller.post('/', function(req, res){
-	console.log(req.body.distance);
-	res.send('works');
+	runs.push(req.body);
+	res.json(runs);
 })
 
 module.exports = controller;
