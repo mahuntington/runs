@@ -15,6 +15,11 @@ controller.post('/', function(req, res){
 	res.json(runs);
 });
 
+controller.put('/:id', function(req, res){
+	runs[req.params.id] = req.body;
+	res.json(runs);
+});
+
 controller.delete('/:id', function(req, res){
 	runs.splice(req.params.id, 1);
 	res.json(runs);
