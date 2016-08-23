@@ -14,4 +14,9 @@ controller.get('/:id', function(req, res){
 	res.json(runs[req.params.id]);
 });
 
+controller.post('/', function(req, res){
+	console.log(req.body.distance);
+	res.send('works');
+})
+
 module.exports = controller;

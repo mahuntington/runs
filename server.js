@@ -1,6 +1,9 @@
 var express = require('express'); //require express package
 var app = express(); //create application variable
+var bodyParser = require('body-parser');
 var PORT = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
 
 var runController = require('./controllers/runs.js');
 app.use('/runs', runController);
