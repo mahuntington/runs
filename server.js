@@ -13,7 +13,7 @@ app.use(function(req, res, next){
 	next();
 });
 
-app.use(function(req, res, next){
+app.use('/foo', function(req, res, next){
 	console.log('3rd middleware doin. stuff');
 	next();
 });
@@ -26,7 +26,11 @@ app.get('/', function(request, response){
 
 app.get('/foo', function(req, res){
 	res.send('works');
-})
+});
+
+app.get('/foo/bar', function(req, res){
+	res.send('works');
+});
 
 //params: port, callback to execute once listening has begun
 app.listen(PORT, function () { //start app listening on port 3000
