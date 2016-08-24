@@ -35,12 +35,12 @@ var render = function(){
 			});
 		d3.selectAll('circle').on('click', function(datum, index){
 			//send delete
+			d3.event.stopPropagation();
 			d3.request('/runs/'+datum.id)
 				.header("Content-Type", "application/json") //we're sending data
 				.send('DELETE', render); //send a DELETE request
 		});
 	});
-
 };
 
 render();
