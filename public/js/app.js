@@ -33,3 +33,21 @@ d3.json('/runs', function(error, data){
 			return convertXDataPointToVisualPoint(new Date(datum.date));
 		});
 });
+
+d3.select('svg').on('click', function(){
+	var distance = convertYDataPointToVisualPoint.invert(d3.event.offsetY);
+	var date = convertXDataPointToVisualPoint.invert(d3.event.offsetX);
+	var runObject = {
+		distance: distance,
+		date: date
+	};
+	d3.request('/runs') //make a request to the server
+		.header("Content-Type", "application/json") //tell the server we're sending JSON data
+		.post(
+			//must turn data object into string
+			JSON.stringify(runObject),
+			function(){ //callback
+				console.log('success');
+			}
+		);
+})
