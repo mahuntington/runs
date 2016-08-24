@@ -27,7 +27,6 @@ var render = function(){
 		});
 		circles.enter()
 			.append('circle')
-			.attr('r', 5)
 			.attr('cy', function(datum, index){
 				return convertYDataPointToVisualPoint(datum.distance);
 			})
