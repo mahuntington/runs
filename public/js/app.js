@@ -94,6 +94,11 @@ d3.select('svg').on('click', function(){
 });
 
 var leftAxis = d3.axisLeft(convertYDataPointToVisualPoint); //create a left axis based on the yScale
+var bottomAxis = d3.axisBottom(convertXDataPointToVisualPoint); //create a left axis based on the yScale
 d3.select('svg')
 	.append('g') //append a group element
 	.call(leftAxis); //apply the axis to it
+d3.select('svg')
+	.append('g') //append a group element
+	.attr('transform', 'translate(0,'+HEIGHT+')')
+	.call(bottomAxis); //apply the axis to it
