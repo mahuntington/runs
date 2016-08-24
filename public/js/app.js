@@ -22,9 +22,10 @@ convertXDataPointToVisualPoint.domain([new Date('2016-1-1'), new Date('2017-1-1'
 
 var render = function(){
 	d3.json('/runs', function(error, data){
-		d3.select('svg').selectAll('circle')
-			.data(data)
-			.enter()
+		var circles = d3.select('svg').selectAll('circle').data(data, function(datum){
+			return datum.id;
+		});
+		circles.enter()
 			.append('circle')
 			.attr('r', 5)
 			.attr('cy', function(datum, index){
