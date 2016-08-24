@@ -33,6 +33,7 @@ var render = function(){
 			.attr('cx', function(datum, index){
 				return convertXDataPointToVisualPoint(new Date(datum.date));
 			});
+		circles.exit().remove();
 		d3.selectAll('circle').on('click', function(datum, index){
 			//send delete
 			d3.event.stopPropagation();
