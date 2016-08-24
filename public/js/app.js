@@ -77,9 +77,18 @@ var render = function(){
 
 render();
 
+var lastTransform = null;
 d3.select('svg').on('click', function(){
-	var distance = convertYDataPointToVisualPoint.invert(d3.event.offsetY);
-	var date = convertXDataPointToVisualPoint.invert(d3.event.offsetX);
+	var x = d3.event.offsetX; //use offset to get point within svg container
+	var y = d3.event.offsetY;
+
+	if(lastTransform !== null){
+		x = lastTransform.invertX(d3.event.offsetX); //use offset to get point within svg container
+		y = lastTransform.invertY(d3.event.offsetY);
+	}
+
+	var distance = convertYDataPointToVisualPoint.invert(y);
+	var date = convertXDataPointToVisualPoint.invert(x);
 	var runObject = {
 		distance: distance,
 		date: date
@@ -106,9 +115,10 @@ d3.select('svg')
 	.call(bottomAxis); //apply the axis to it
 
 var zoomCallback = function(){
+	lastTransform = d3.event.transform; //save the transform for later inversion with clicks
 	d3.select('#points').attr("transform", d3.event.transform);
 	d3.select('#x-axis').call(bottomAxis.scale(d3.event.transform.rescaleX(convertXDataPointToVisualPoint)));
-    d3.select('#y-axis').call(leftAxis.scale(d3.event.transform.rescaleY(convertYDataPointToVisualPoint)));
+	d3.select('#y-axis').call(leftAxis.scale(d3.event.transform.rescaleY(convertYDataPointToVisualPoint)));
 }
 var zoom = d3.zoom().on('zoom', zoomCallback);
 d3.select('svg').call(zoom);
