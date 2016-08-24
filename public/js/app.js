@@ -5,15 +5,31 @@ d3.select('svg')
 	.attr('width', WIDTH)
 	.attr('height', HEIGHT);
 
+var convertYDataPointToVisualPoint = d3.scaleLinear();
+var convertXDataPointToVisualPoint = d3.scaleTime();
+
+convertYDataPointToVisualPoint.range([HEIGHT,0]);
+convertYDataPointToVisualPoint.domain([0, 5]);
+
+convertXDataPointToVisualPoint.range([0,WIDTH]);
+convertXDataPointToVisualPoint.domain([new Date('2016-1-1'), new Date('2017-1-1')]);
+
+// console.log(convertXDataPointToVisualPoint(new Date('2016-12-1')));
+// console.log(convertXDataPointToVisualPoint.invert(490));
+
+// console.log(convertYDataPointToVisualPoint(0.1));
+// console.log(convertYDataPointToVisualPoint.invert(490));
+
 d3.json('/runs', function(error, data){
 	d3.select('svg').selectAll('circle')
 		.data(data)
 		.enter()
 		.append('circle')
 		.attr('r', 5)
+		.attr('cy', function(datum, index){
+			return convertYDataPointToVisualPoint(datum.distance);
+		})
 		.attr('cx', function(datum, index){
-			console.log(datum);
-			//console.log(index);
-			return index*100;
+			return convertXDataPointToVisualPoint(new Date(datum.date));
 		});
 });
