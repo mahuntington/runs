@@ -41,6 +41,37 @@ var render = function(){
 				.header("Content-Type", "application/json") //we're sending data
 				.send('DELETE', render); //send a DELETE request
 		});
+
+		//....
+		//define callbacks for dragging
+		var dragEnd = function(d){ //d is the data for the dragged object
+			var x = d3.event.x;
+			var y = d3.event.y;
+
+			var date = convertXDataPointToVisualPoint.invert(x);
+			var distance = convertYDataPointToVisualPoint.invert(y);
+
+			d.date = date;
+			d.distance = distance;
+
+			d3.request('/runs/'+d.id)
+				.header("Content-Type","application/json") //we're sending JSON
+				.send('PUT', JSON.stringify(d), render);//pass alterted 'd' object to API
+		}
+		var drag = function(d){ //d is the data for the dragged object
+			var x = d3.event.x; //x position of cursor
+			var y = d3.event.y; //y position of cursor
+			d3.select(this).attr('cx', x);
+			d3.select(this).attr('cy', y);
+		}
+		//create the behavior
+		var dragBehavior = d3.drag()
+			// .on('start', dragStart)
+			.on('drag', drag)
+			.on('end', dragEnd);
+		//...
+		//apply it to a selection
+		d3.selectAll('circle').call(dragBehavior);
 	});
 };
 
