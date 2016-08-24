@@ -20,19 +20,23 @@ convertXDataPointToVisualPoint.domain([new Date('2016-1-1'), new Date('2017-1-1'
 // console.log(convertYDataPointToVisualPoint(0.1));
 // console.log(convertYDataPointToVisualPoint.invert(490));
 
-d3.json('/runs', function(error, data){
-	d3.select('svg').selectAll('circle')
-		.data(data)
-		.enter()
-		.append('circle')
-		.attr('r', 5)
-		.attr('cy', function(datum, index){
-			return convertYDataPointToVisualPoint(datum.distance);
-		})
-		.attr('cx', function(datum, index){
-			return convertXDataPointToVisualPoint(new Date(datum.date));
-		});
-});
+var render = function(){
+	d3.json('/runs', function(error, data){
+		d3.select('svg').selectAll('circle')
+			.data(data)
+			.enter()
+			.append('circle')
+			.attr('r', 5)
+			.attr('cy', function(datum, index){
+				return convertYDataPointToVisualPoint(datum.distance);
+			})
+			.attr('cx', function(datum, index){
+				return convertXDataPointToVisualPoint(new Date(datum.date));
+			});
+	});
+};
+
+render();
 
 d3.select('svg').on('click', function(){
 	var distance = convertYDataPointToVisualPoint.invert(d3.event.offsetY);
@@ -46,8 +50,6 @@ d3.select('svg').on('click', function(){
 		.post(
 			//must turn data object into string
 			JSON.stringify(runObject),
-			function(){ //callback
-				console.log('success');
-			}
+			render
 		);
 })
