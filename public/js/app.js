@@ -52,4 +52,4 @@ d3.select('svg').on('click', function(){
 			JSON.stringify(runObject),
 			render
 		);
-})
+});
