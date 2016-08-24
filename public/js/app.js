@@ -22,7 +22,7 @@ convertXDataPointToVisualPoint.domain([new Date('2016-1-1'), new Date('2017-1-1'
 
 var render = function(){
 	d3.json('/runs', function(error, data){
-		var circles = d3.select('svg').selectAll('circle').data(data, function(datum){
+		var circles = d3.select('#points').selectAll('circle').data(data, function(datum){
 			return datum.id;
 		});
 		circles.enter()
@@ -97,8 +97,18 @@ var leftAxis = d3.axisLeft(convertYDataPointToVisualPoint); //create a left axis
 var bottomAxis = d3.axisBottom(convertXDataPointToVisualPoint); //create a left axis based on the yScale
 d3.select('svg')
 	.append('g') //append a group element
+	.attr('id', 'y-axis')
 	.call(leftAxis); //apply the axis to it
 d3.select('svg')
 	.append('g') //append a group element
+	.attr('id', 'x-axis')
 	.attr('transform', 'translate(0,'+HEIGHT+')')
 	.call(bottomAxis); //apply the axis to it
+
+var zoomCallback = function(){
+	d3.select('#points').attr("transform", d3.event.transform);
+	d3.select('#x-axis').call(bottomAxis.scale(d3.event.transform.rescaleX(convertXDataPointToVisualPoint)));
+    d3.select('#y-axis').call(leftAxis.scale(d3.event.transform.rescaleY(convertYDataPointToVisualPoint)));
+}
+var zoom = d3.zoom().on('zoom', zoomCallback);
+d3.select('svg').call(zoom);
