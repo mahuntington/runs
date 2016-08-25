@@ -21,8 +21,9 @@ var sessionController = require('./controllers/sessions.js');
 app.use('/sessions', sessionController);
 
 app.get('/', function(req, res){
-	console.log(req.session.currentUser);
-	res.render('index.ejs');
+	res.render('index.ejs', {
+		currentUser: req.session.currentUser
+	});
 });
 
 //params: port, callback to execute once listening has begun
