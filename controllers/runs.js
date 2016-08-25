@@ -2,13 +2,15 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var controller = express.Router();
 var Run = require('../models/runs.js');
+var User = require('../models/users.js');
 
 controller.use(bodyParser.json());
 
 controller.get('/', function(req, res){
-	Run.findAll({}).then(function(foundRuns){
-		//createdRun is the object representation of the row created in the DB
-		res.json(foundRuns);
+	User.findById(req.session.currentUser.id).then(function(foundUser){
+		foundUser.getRuns().then(function(currentUserRuns){
+			res.json(currentUserRuns);
+		})
 	});
 });
 
@@ -23,9 +25,13 @@ controller.get('/:id', function(req, res){
 });
 
 controller.post('/', function(req, res){
-	Run.create(req.body).then(function(createdRun){
-		//createdRun is the object representation of the row created in the DB
-		res.json(createdRun);
+	User.findById(req.session.currentUser.id).then(function(foundUser){
+		Run.create(req.body).then(function(createdRun){
+			//createdRun is the object representation of the row created in the DB
+			foundUser.addRun(createdRun).then(function(createdRun){
+				res.json(createdRun);
+			})
+		});
 	});
 });
 
