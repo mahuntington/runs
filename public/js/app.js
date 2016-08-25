@@ -108,11 +108,23 @@ d3.json('/runs', function(error, data){
 	var dateDomain = d3.extent(data, function(element){
 		return new Date(element.date);
 	});
+
 	convertYDataPointToVisualPoint.range([HEIGHT,0]);
-	convertYDataPointToVisualPoint.domain(distanceDomain);
+	if(distanceDomain[0] == undefined || distanceDomain[1] == undefined){
+		convertYDataPointToVisualPoint.domain([0,5]);
+	}
+	else {
+		convertYDataPointToVisualPoint.domain(distanceDomain);
+	}
 
 	convertXDataPointToVisualPoint.range([0,WIDTH]);
-	convertXDataPointToVisualPoint.domain(dateDomain);
+	if(dateDomain[0] == undefined || dateDomain[1] == undefined){
+		convertXDataPointToVisualPoint.domain([new Date('2016-1-1'),new Date('2017-1-1')]);
+	}
+	else {
+		convertXDataPointToVisualPoint.domain(dateDomain);
+	}
+
 
 	var leftAxis = d3.axisLeft(convertYDataPointToVisualPoint); //create a left axis based on the yScale
 	var bottomAxis = d3.axisBottom(convertXDataPointToVisualPoint); //create a left axis based on the yScale
