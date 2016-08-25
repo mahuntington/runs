@@ -24,4 +24,10 @@ controller.post('/', function(req, res){
 	});
 });
 
+controller.delete('/', function(req, res){
+	req.session.destroy(function(){
+		res.redirect('/');
+	})
+});
+
 module.exports = controller;

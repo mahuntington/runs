@@ -1,7 +1,10 @@
 var express = require('express'); //require express package
 var session = require('express-session');
+var methodOverride = require('method-override');
 var app = express(); //create application variable
 var PORT = process.env.PORT || 3000;
+
+app.use(methodOverride('_method'));
 
 app.use(session({ //setting up session encryption info
 	secret: "asdfasdfasdf", //unique keyword for encrypting session data
