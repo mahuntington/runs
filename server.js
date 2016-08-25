@@ -6,7 +6,7 @@ var PORT = process.env.PORT || 3000;
 app.use(session({ //setting up session encryption info
 	secret: "asdfasdfasdf", //unique keyword for encrypting session data
 	resave: false, // don't resave session if nothing changed
-	saveUninitialized: false //even if no data, set a cookie
+	saveUninitialized: false //if no data, don't set a cookie
 }));
 
 app.use(express.static('public')); //set up a static asset dir in /public
