@@ -10,7 +10,9 @@ controller.get('/new', function(req, res){
 });
 
 controller.post('/', function(req, res){
-	res.send(req.body);
+	User.create(req.body).then(function(createdUser){
+		res.redirect('/');
+	});
 });
 
 module.exports = controller;
