@@ -4,9 +4,16 @@
 		<link rel="stylesheet" href="/css/examples.css"/>
 	</head>
 	<body>
-		<h1>Welcome to SVG!</h1>
 		<svg>
-			<circle r="100" cx="10" cy="20" fill="blue" stroke="red" stroke-width="5"/>
+			<line x1="0" y1="0" x2="100" y2="100" stroke="purple"/>
+			<rect x="50" y="20" width="150" height="150" fill="red" stroke="blue"/>
+			<ellipse cx="200" cy="80" rx="100" ry="50" fill="green"/>
+			<polyline points="20,20 40,25 60,40 80,120 120,140 200,180" stroke="red" fill="green"/>
+			<polygon points="200,10 250,190 160,210 0,10" />
+			<g transform="translate(50,100) scale(2) rotate(45)">
+				<circle r="10" cx="-10" cy="0" fill="blue" stroke="red" stroke-width="5"/>
+				<text>This is text</text>
+			</g>
 		</svg>
 	</body>
 </html>
