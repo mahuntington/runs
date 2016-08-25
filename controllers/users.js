@@ -1,7 +1,8 @@
 var express = require('express');
-var controller = express.Router();
+var bcrypt = require('bcrypt');
 var bodyParser = require('body-parser');
-var User = require('../models/users.js')
+var controller = express.Router();
+var User = require('../models/users.js');
 
 controller.use(bodyParser.urlencoded({extended:true}));
 
