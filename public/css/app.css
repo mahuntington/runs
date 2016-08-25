@@ -4,6 +4,9 @@ body {
 svg {
 	overflow: visible;
 }
+#container {
+	overflow: hidden;
+}
 circle {
 	r: 5;
 	fill:black;
