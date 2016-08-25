@@ -10,6 +10,9 @@ app.use('/runs', runController);
 var userController = require('./controllers/users.js');
 app.use('/users', userController);
 
+var sessionController = require('./controllers/sessions.js');
+app.use('/sessions', sessionController);
+
 app.get('/', function(request, response){
 	response.render('index.ejs');
 });
