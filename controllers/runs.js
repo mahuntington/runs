@@ -1,6 +1,9 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var controller = express.Router();
 var Run = require('../models/runs.js');
+
+controller.use(bodyParser.json());
 
 controller.get('/', function(req, res){
 	Run.findAll({}).then(function(foundRuns){
