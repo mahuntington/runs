@@ -16,6 +16,7 @@ controller.post('/', function(req, res){
 		}
 	}).then(function(foundUser){
 		if(foundUser.password == req.body.password){
+			req.session.currentUser = foundUser;
 			res.redirect('/');
 		} else {
 			res.redirect('/sessions/new');
