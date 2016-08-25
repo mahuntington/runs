@@ -9,8 +9,8 @@ app.use(bodyParser.json());
 var runController = require('./controllers/runs.js');
 app.use('/runs', runController);
 
-var runController = require('./controllers/users.js');
-app.use('/users', runController);
+var userController = require('./controllers/users.js');
+app.use('/users', userController);
 
 app.get('/', function(request, response){
 	response.render('index.ejs');
