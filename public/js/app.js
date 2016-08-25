@@ -122,3 +122,14 @@ var zoomCallback = function(){
 }
 var zoom = d3.zoom().on('zoom', zoomCallback);
 d3.select('svg').call(zoom);
+
+
+//Date Parsing/Formatting
+// var dateSting = '20160101';
+// var dateFormat = '%Y%m%d';
+
+// var parseSAPDateString = d3.timeParse(dateFormat);
+// console.log(parseSAPDateString('20160101'));
+
+// var formatDateForSAP = d3.timeFormat(dateFormat);
+// console.log(formatDateForSAP(new Date()));
